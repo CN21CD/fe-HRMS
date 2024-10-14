@@ -1,12 +1,10 @@
+import Layout from './components/Layout';
 import './App.css';
-// import Login from './screens/Login';
-import Register from './screens/Register';
 
 function App() {
   return (
     <>
-      {/* <Login /> */}
-      <Register />
+      <Layout />
     </>
   );
 }
