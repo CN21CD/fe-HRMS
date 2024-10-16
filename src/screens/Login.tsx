@@ -1,9 +1,45 @@
 import { Link } from 'react-router-dom';
-import img from '../assets/login-register-pic.jpg';
-import logo from '../assets/LogoSample-orange.png';
+import { toast } from 'react-toastify';
 import { Input, Button } from 'antd';
+import { useState } from 'react';
+import logo from '../assets/LogoSample-orange.png';
+import img from '../assets/login-register-pic.jpg';
+import axios from 'axios';
 
 const Login = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const BASE_URL: string = import.meta.env.VITE_APP_API;
+
+  const handleLogin = async () => {
+    const userInfo = {
+      identifier: email,
+      password: password,
+    };
+
+    try {
+      setLoading(true);
+      const res = await axios.post(`${BASE_URL}/api/auth/login`, userInfo);
+      if (res.status === 200) {
+        const token = res.data.token;
+        localStorage.setItem('authToken', token);
+        setLoading(false);
+        toast.success('Đăng nhập thành công');
+      } else if (res.status === 401) {
+        setLoading(false);
+        toast.error('Tài khoản không tồn tại');
+      } else {
+        setLoading(false);
+        toast.error('Đăng nhập không thành công');
+      }
+    } catch (error) {
+      setLoading(false);
+      toast.error('Đăng nhập không thành công');
+      console.error('Lỗi: ', error);
+    }
+  };
+
   return (
     <div className='flex justify-center items-center  h-screen'>
       <div className='bg-white flex flex-row w-[900px] h-[620px] shadow-2xl rounded-xl overflow-hidden'>
@@ -50,13 +86,26 @@ const Login = () => {
           <p className='my-3.5'>Email hoặc tài khoản:</p>
           <Input
             size='large'
-            placeholder='Nhập email hoặc tài khoản'
+            placeholder='Nhập email'
             allowClear
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <p className='my-3.5'>Mật khẩu:</p>
-          <Input.Password size='large' placeholder='Nhập mật khẩu' allowClear />
+          <Input.Password
+            size='large'
+            placeholder='Nhập mật khẩu'
+            allowClear
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-          <Button type='primary' className='w-[160px] h-[60px] my-6'>
+          <Button
+            loading={loading}
+            type='primary'
+            onClick={handleLogin}
+            className='w-[160px] h-[60px] my-6'
+          >
             <p className='text-white text-xl font-medium'>Đăng nhập</p>
           </Button>
 
