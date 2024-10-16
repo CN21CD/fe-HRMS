@@ -6,31 +6,34 @@ import axios from 'axios';
 import logo from '../assets/LogoSample-orange.png';
 import img from '../assets/login-register-pic.jpg';
 
+interface IState {
+  identifier: string;
+  password: string;
+}
+
 const Login = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const BASE_URL: string = import.meta.env.VITE_APP_API;
+  const BASE_URL = import.meta.env.VITE_APP_API;
   const nav = useNavigate();
 
-  const handleLogin = async () => {
-    const userInfo = {
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const state: IState = {
       identifier: email,
       password: password,
     };
 
     try {
       setLoading(true);
-      const res = await axios.post(`${BASE_URL}/api/auth/login`, userInfo);
+      const res = await axios.post(`${BASE_URL}/api/auth/login`, state);
       if (res.status === 200) {
         const token = res.data.token;
         localStorage.setItem('authToken', token);
         setLoading(false);
         toast.success('Đăng nhập thành công');
         nav('/');
-      } else if (res.status === 401) {
-        setLoading(false);
-        toast.error('Tài khoản không tồn tại');
       } else {
         setLoading(false);
         toast.error('Đăng nhập không thành công');
@@ -77,39 +80,45 @@ const Login = () => {
           <img
             src={logo}
             alt='logo'
-            className='w-[60px] h-[60px ] absolute right-9 bottom-9'
+            className='w-[60px] h-[60px] absolute left-9 bottom-9'
           />
         </div>
 
         <div className='flex-1 p-9 text-[18px]'>
-          <h2 className='text-[48px] font-medium text-primary-orange'>
-            Đăng nhập
-          </h2>
-          <p className='my-3.5'>Email hoặc tài khoản:</p>
-          <Input
-            size='large'
-            placeholder='Nhập email'
-            allowClear
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <p className='my-3.5'>Mật khẩu:</p>
-          <Input.Password
-            size='large'
-            placeholder='Nhập mật khẩu'
-            allowClear
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <form onSubmit={handleLogin}>
+            <h2 className='text-[48px] font-medium text-primary-orange'>
+              Đăng nhập
+            </h2>
+            <p className='my-3.5'>
+              Email
+              <span className='text-red-500'> *</span>
+            </p>
+            <Input
+              size='large'
+              placeholder='Nhập email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <p className='my-3.5'>
+              Mật khẩu
+              <span className='text-red-500'> *</span>
+            </p>
+            <Input.Password
+              size='large'
+              placeholder='Nhập mật khẩu'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
 
-          <Button
-            loading={loading}
-            type='primary'
-            onClick={handleLogin}
-            className='w-[160px] h-[60px] my-6'
-          >
-            <p className='text-white text-xl font-medium'>Đăng nhập</p>
-          </Button>
+            <Button
+              loading={loading}
+              type='primary'
+              htmlType='submit'
+              className='my-6 w-[160px] h-[60px]'
+            >
+              <p className='text-white text-xl font-medium'>Đăng nhập</p>
+            </Button>
+          </form>
 
           <div className='flex gap-1'>
             <p>Chưa có tài khoản?</p>
