@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
+import { Input, Button } from 'antd';
 import img from '../assets/login-register-pic.jpg';
 import logo from '../assets/LogoSample-orange.png';
-import { Input, Button } from 'antd';
 
 const Register = () => {
   return (

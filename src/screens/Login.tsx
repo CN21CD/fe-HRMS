@@ -1,16 +1,17 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Input, Button } from 'antd';
 import { useState } from 'react';
+import axios from 'axios';
 import logo from '../assets/LogoSample-orange.png';
 import img from '../assets/login-register-pic.jpg';
-import axios from 'axios';
 
 const Login = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const BASE_URL: string = import.meta.env.VITE_APP_API;
+  const nav = useNavigate();
 
   const handleLogin = async () => {
     const userInfo = {
@@ -26,6 +27,7 @@ const Login = () => {
         localStorage.setItem('authToken', token);
         setLoading(false);
         toast.success('Đăng nhập thành công');
+        nav('/');
       } else if (res.status === 401) {
         setLoading(false);
         toast.error('Tài khoản không tồn tại');
