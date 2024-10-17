@@ -8,25 +8,27 @@ const Register = () => {
     <div className='flex justify-center items-center  h-screen'>
       <div className='bg-white flex flex-row w-[900px] h-[620px] shadow-2xl rounded-xl overflow-hidden'>
         <div className='flex-1 p-9 text-[18px]'>
-          <h2 className='text-[48px] font-medium text-primary-orange'>
-            Đăng ký
-          </h2>
-          <p className='my-3.5'>Email:</p>
-          <Input size='large' placeholder='Nhập email' allowClear />
-          <p className='my-3.5'>Tài khoản:</p>
-          <Input size='large' placeholder='Nhập tên tài khoản' allowClear />
-          <p className='my-3.5'>Mật khẩu:</p>
-          <Input.Password size='large' placeholder='Nhập mật khẩu' allowClear />
-          <p className='my-3.5'>Nhập lại mật khẩu:</p>
-          <Input.Password
-            size='large'
-            placeholder='Nhập lại mật khẩu'
-            allowClear
-          />
+          <form>
+            <h2 className='text-[48px] font-medium text-primary-orange'>
+              Đăng ký
+            </h2>
+            <p className='my-3.5'>Email</p>
+            <Input size='large' placeholder='Nhập email' />
+            <p className='my-3.5'>Tài khoản</p>
+            <Input size='large' placeholder='Nhập tên tài khoản' />
+            <p className='my-3.5'>Mật khẩu</p>
+            <Input.Password size='large' placeholder='Nhập mật khẩu' />
+            <p className='my-3.5'>Nhập lại mật khẩu</p>
+            <Input.Password size='large' placeholder='Nhập lại mật khẩu' />
 
-          <Button type='primary' className='w-[160px] h-[60px] my-6'>
-            <p className='text-white text-xl font-medium'>Tiếp tục</p>
-          </Button>
+            <Button
+              htmlType='submit'
+              type='primary'
+              className='w-[160px] h-[60px] my-6'
+            >
+              <p className='text-white text-xl font-medium'>Tiếp tục</p>
+            </Button>
+          </form>
 
           <div className='flex gap-1'>
             <p>Đã có tài khoản?</p>

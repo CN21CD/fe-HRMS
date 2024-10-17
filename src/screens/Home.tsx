@@ -19,6 +19,9 @@ const Home = () => {
       >
         <p className='px-4 pt-2 text-white'>Thêm thông tin người dùng</p>
       </Link>
+      <Link className='border rounded-lg bg-primary-orange' to={'/verify'}>
+        <p className='px-4 pt-2 text-white'>Đến xác minh</p>
+      </Link>
     </div>
   );
 };

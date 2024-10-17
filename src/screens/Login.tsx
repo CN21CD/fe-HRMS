@@ -27,16 +27,18 @@ const Login = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post(`${BASE_URL}/api/auth/login`, state);
+      const res = await axios.post(`${BASE_URL}/auth/login`, state);
       if (res.status === 200) {
-        const token = res.data.token;
-        localStorage.setItem('authToken', token);
+        localStorage.setItem('authToken', res.data.token);
         setLoading(false);
         toast.success('Đăng nhập thành công');
         nav('/');
+      } else if (res.status === 401) {
+        setLoading(false);
+        toast.error('Tài khoản không tồn tại');
       } else {
         setLoading(false);
-        toast.error('Đăng nhập không thành công');
+        toast.error('Lỗi không xác định');
       }
     } catch (error) {
       setLoading(false);
@@ -46,7 +48,7 @@ const Login = () => {
   };
 
   return (
-    <div className='flex justify-center items-center  h-screen'>
+    <div className='flex justify-center items-center h-screen'>
       <div className='bg-white flex flex-row w-[900px] h-[620px] shadow-2xl rounded-xl overflow-hidden'>
         <div
           className='flex-1 bg-cover p-9 text-[20px] relative'
@@ -89,20 +91,14 @@ const Login = () => {
             <h2 className='text-[48px] font-medium text-primary-orange'>
               Đăng nhập
             </h2>
-            <p className='my-3.5'>
-              Email
-              <span className='text-red-500'> *</span>
-            </p>
+            <p className='my-3.5'>Email</p>
             <Input
               size='large'
               placeholder='Nhập email'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <p className='my-3.5'>
-              Mật khẩu
-              <span className='text-red-500'> *</span>
-            </p>
+            <p className='my-3.5'>Mật khẩu</p>
             <Input.Password
               size='large'
               placeholder='Nhập mật khẩu'

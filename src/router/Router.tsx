@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import AddUserProfile from '../screens/AddUserProfile';
 import AddCompany from '../screens/AddCompany';
 import Register from '../screens/Register';
+import Verify from '../screens/Verify';
 import Login from '../screens/Login';
 import Home from '../screens/Home';
 import App from '../App';
@@ -30,6 +31,10 @@ export const Routers = createBrowserRouter([
       {
         path: '/add-user-profile',
         element: <AddUserProfile />,
+      },
+      {
+        path: '/verify',
+        element: <Verify />,
       },
     ],
   },
