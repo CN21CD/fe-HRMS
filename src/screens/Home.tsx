@@ -1,10 +1,21 @@
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
+import { Button } from 'antd';
+import { logout } from '../redux/slices/userSlice';
 
 const Home = () => {
   const user = useSelector((state: RootState) => state.user.user); // test redux
+  const nav = useNavigate();
+  const dispatch = useDispatch();
+
   console.log(user);
+
+  const clearToken = async () => {
+    await localStorage.removeItem('authToken');
+    dispatch(logout());
+    nav('/login');
+  };
 
   return (
     <div className='w-full h-screen flex flex-col justify-center items-center'>
@@ -27,6 +38,9 @@ const Home = () => {
       <Link className='border rounded-lg bg-primary-orange' to={'/verify'}>
         <p className='px-4 pt-2 text-white'>Đến xác minh</p>
       </Link>
+      <Button onClick={clearToken} type='primary' size='large'>
+        <p className='text-white'>Đăng xuất</p>
+      </Button>
     </div>
   );
 };
