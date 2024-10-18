@@ -1,14 +1,23 @@
 import { Link, useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 import { toast } from 'react-toastify';
 import { Input, Button } from 'antd';
 import { useState } from 'react';
 import axios from 'axios';
 import logo from '../assets/LogoSample-orange.png';
 import img from '../assets/login-register-pic.jpg';
+import { useDispatch } from 'react-redux';
+import { loginSuccess } from '../redux/slices/userSlice';
 
 interface IState {
   identifier: string;
   password: string;
+}
+
+interface IJwtPayload {
+  account_id: string;
+  company_id: string;
+  role: string;
 }
 
 const Login = () => {
@@ -16,6 +25,7 @@ const Login = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const BASE_URL = import.meta.env.VITE_APP_API;
+  const dispatch = useDispatch();
   const nav = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -29,7 +39,15 @@ const Login = () => {
       setLoading(true);
       const res = await axios.post(`${BASE_URL}/auth/login`, state);
       if (res.status === 200) {
-        localStorage.setItem('authToken', res.data.token);
+        const token = res.data.token;
+        localStorage.setItem('authToken', token);
+        const decodeToken: IJwtPayload = jwtDecode(token);
+        const user: IJwtPayload = {
+          account_id: decodeToken.account_id,
+          company_id: decodeToken.company_id,
+          role: decodeToken.role,
+        };
+        dispatch(loginSuccess(user));
         setLoading(false);
         toast.success('Đăng nhập thành công');
         nav('/');

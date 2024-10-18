@@ -1,6 +1,11 @@
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 const Home = () => {
+  const user = useSelector((state: RootState) => state.user.user); // test redux
+  console.log(user);
+
   return (
     <div className='w-full h-screen flex flex-col justify-center items-center'>
       <p>Home</p>

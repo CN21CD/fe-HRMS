@@ -48,45 +48,43 @@ const Verify = () => {
     <div className='flex justify-center items-center h-screen'>
       <div className='flex flex-col justify-center items-center w-[900px] h-[620px] shadow-2xl rounded-xl text-[1.25rem] p-9'>
         <div className='text-[1.25rem]'>
-          <h2 className='text-[48px] mb-10 font-extrabold text-primary-orange text-center'>
+          <h2 className='text-[48px] mb-10 font-extrabold text-primary-orange'>
             Xác minh email của bạn
           </h2>
-          <div>
-            <p className='mb-4'>
-              {send
-                ? 'Vui lòng xác nhận mã OTP được gửi đến mail: '
-                : 'Gửi mã otp đến mail: '}
-              <span className='text-blue-500 underline'>abc@123.com</span>
-            </p>
-            <Input
-              className='mb-4'
-              maxLength={6}
-              disabled={send === false}
+          <p className='mb-4'>
+            {send
+              ? 'Vui lòng xác nhận mã OTP được gửi đến mail: '
+              : 'Gửi mã otp đến mail: '}
+            <span className='text-blue-500 underline'>abc@123.com</span>
+          </p>
+          <Input
+            className='mb-4'
+            maxLength={6}
+            disabled={send === false}
+            size='large'
+            placeholder='nhập mã OTP'
+          />
+          <div className='flex gap-2'>
+            <Button
+              onClick={handleSendOTP}
+              loading={loading}
               size='large'
-              placeholder='nhập mã OTP'
-            />
-            <div className='flex gap-2'>
-              <Button
-                onClick={handleSendOTP}
-                loading={loading}
-                size='large'
-                type='primary'
-                disabled={countdown > 0}
-              >
-                <p className='text-inherit font-medium'>
-                  {countdown === 0 ? 'Gửi mã OTP' : `Gửi lại sau ${countdown}`}
-                </p>
-              </Button>
-              <Button
-                onClick={handleVerify}
-                loading={verifyloading}
-                size='large'
-                type='primary'
-                disabled={send === false}
-              >
-                <p className='text-white font-medium'>Xác minh</p>
-              </Button>
-            </div>
+              type='primary'
+              disabled={countdown > 0}
+            >
+              <p className='text-inherit font-medium'>
+                {countdown === 0 ? 'Gửi mã OTP' : `Gửi lại sau ${countdown}`}
+              </p>
+            </Button>
+            <Button
+              onClick={handleVerify}
+              loading={verifyloading}
+              size='large'
+              type='primary'
+              disabled={send === false}
+            >
+              <p className='text-white font-medium'>Xác minh</p>
+            </Button>
           </div>
         </div>
       </div>
