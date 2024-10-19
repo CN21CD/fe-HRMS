@@ -1,56 +1,37 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { Input, Button } from 'antd';
+import { useState } from 'react';
 import img from '../assets/login-register-pic.jpg';
 import logo from '../assets/LogoSample-orange.png';
-import { toast } from 'react-toastify';
-import { useState } from 'react';
-import axios from 'axios';
 
 const Register = () => {
   const [email, setEmail] = useState<string>('');
   const [name, setName] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPass, setConfirmPass] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
-  const BASE_URL = import.meta.env.VITE_APP_API;
+  const nav = useNavigate();
 
-  const handleRegister = async (e: React.FormEvent) => {
+  const navToUserProfile = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     if (confirmPass != password) {
       toast.error('Lỗi, mật khẩu không đúng');
-      setLoading(false);
       return;
     }
 
     const state = {
-      email: email,
-      name: name,
-      password: password,
+      name,
+      email,
+      password,
     };
-
-    try {
-      const res = await axios.post(`${BASE_URL}/auth/register`, state);
-
-      if (res.status === 200) {
-        toast('Đăng ký thành công');
-        setLoading(false);
-      } else {
-        toast.error('Lỗi, đăng ký không thành công');
-        setLoading(false);
-      }
-    } catch (error) {
-      toast.error('Lỗi, đăng ký không thành công');
-      console.error(error);
-      setLoading(false);
-    }
+    nav('/add-company', { state });
   };
 
   return (
     <div className='flex justify-center items-center  h-screen'>
       <div className='bg-white flex flex-row w-[900px] h-[620px] shadow-2xl rounded-xl overflow-hidden'>
         <div className='flex-1 p-9 text-[18px]'>
-          <form onSubmit={handleRegister}>
+          <form onSubmit={navToUserProfile}>
             <h2 className='text-[48px] font-medium text-primary-orange'>
               Đăng ký
             </h2>
@@ -87,7 +68,6 @@ const Register = () => {
               htmlType='submit'
               type='primary'
               className='w-[160px] h-[60px] my-6'
-              loading={loading}
             >
               <p className='text-white text-xl font-medium'>Tiếp tục</p>
             </Button>

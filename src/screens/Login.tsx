@@ -1,13 +1,13 @@
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { jwtDecode } from 'jwt-decode';
 import { toast } from 'react-toastify';
 import { Input, Button } from 'antd';
 import { useState } from 'react';
 import axios from 'axios';
+import { loginSuccess } from '../redux/slices/userSlice';
 import logo from '../assets/LogoSample-orange.png';
 import img from '../assets/login-register-pic.jpg';
-import { useDispatch } from 'react-redux';
-import { loginSuccess } from '../redux/slices/userSlice';
 
 interface IState {
   identifier: string;
