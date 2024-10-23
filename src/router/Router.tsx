@@ -7,9 +7,8 @@ import EditUser from '../screens/EditUser';
 import Register from '../screens/Register';
 import Verify from '../screens/Verify';
 import Login from '../screens/Login';
-// import Admin from '../screens/Admin';
-import App from '../App';
 import Home from '../screens/Home';
+import App from '../App';
 
 export const Routers = createBrowserRouter([
   {
@@ -21,7 +20,7 @@ export const Routers = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: '/admin/systemUser',
+        path: '/admin',
         element: <SystemUser />,
       },
       {

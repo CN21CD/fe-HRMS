@@ -20,7 +20,11 @@ function App() {
   //   checkLoginStatus();
   // }, []);
 
-  return <Layout />;
+  return (
+    <>
+      <Layout />
+    </>
+  );
 }
 
 export default App;
