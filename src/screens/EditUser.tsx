@@ -22,8 +22,21 @@ const EditUser = () => {
     setBirthday(dateString);
   };
 
-  const confirm: PopconfirmProps['onConfirm'] = (e) => {
-    console.log(e);
+  const confirm: PopconfirmProps['onConfirm'] = () => {
+    const data = {
+      name: name,
+      email: email,
+      password: password,
+      userinfo: {
+        fullname: fullName,
+        birthday: birthday,
+        email: email,
+        address: address,
+        phonenumber: phoneNumber,
+      },
+    };
+
+    console.log(data);
   };
 
   return (
