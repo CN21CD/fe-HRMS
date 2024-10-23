@@ -5,7 +5,9 @@ export default {
     extend: {
       colors: {
         'primary-orange': '#ff7b1d',
+        'primary-black': '#333',
         'primary-gray': '#999',
+        'primary-light-gray': '#eee',
       },
       fontFamily: {
         Roboto: ['"Roboto"', 'sans-serif'],

@@ -19,7 +19,6 @@ h4,
 h5,
 h6,
 p,
-b,
-span {
-  @apply text-primary-gray;
+b {
+  @apply text-primary-black;
 }

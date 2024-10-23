@@ -112,16 +112,16 @@ const AddCompany = () => {
                 onClick={() => nav(-1)}
                 className='my-6 w-[160px] h-[60px]'
               >
-                <p className='text-primary-orange text-xl font-medium'>
+                <span className='text-primary-orange text-xl font-medium'>
                   Trở lại
-                </p>
+                </span>
               </Button>
               <Button
                 type='primary'
                 htmlType='submit'
                 className='my-6 w-[160px] h-[60px]'
               >
-                <p className='text-white text-xl font-medium'>Tiếp tục</p>
+                <span className='text-xl font-medium'>Tiếp tục</span>
               </Button>
             </div>
           </form>

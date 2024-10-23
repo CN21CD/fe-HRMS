@@ -127,9 +127,7 @@ const AddUserProfile = () => {
             <Input.TextArea
               placeholder='Địa chỉ'
               value={userAddress}
-              onChange={(e) => {
-                setAddress(e.target.value);
-              }}
+              onChange={(e) => setAddress(e.target.value)}
             />
 
             <div className='flex justify-between'>
@@ -138,9 +136,9 @@ const AddUserProfile = () => {
                 size='large'
                 onClick={() => nav(-1)}
               >
-                <p className='text-primary-orange text-xl font-medium'>
+                <span className='text-primary-orange text-xl font-medium'>
                   Trở lại
-                </p>
+                </span>
               </Button>
 
               <Button
@@ -150,7 +148,7 @@ const AddUserProfile = () => {
                 htmlType='submit'
                 loading={loading}
               >
-                <p className='text-white text-xl font-medium'>Đăng ký</p>
+                <span className='text-xl font-medium'>Đăng ký</span>
               </Button>
             </div>
 

@@ -1,11 +1,15 @@
 import { createBrowserRouter } from 'react-router-dom';
 import AddUserProfile from '../screens/AddUserProfile';
+import AddSystemUser from '../screens/AddSystemUser';
 import AddCompany from '../screens/AddCompany';
+import SystemUser from '../screens/SystemUser';
+import EditUser from '../screens/EditUser';
 import Register from '../screens/Register';
 import Verify from '../screens/Verify';
 import Login from '../screens/Login';
-import Home from '../screens/Home';
+// import Admin from '../screens/Admin';
 import App from '../App';
+import Home from '../screens/Home';
 
 export const Routers = createBrowserRouter([
   {
@@ -17,25 +21,37 @@ export const Routers = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: '/login',
-        element: <Login />,
+        path: '/admin/systemUser',
+        element: <SystemUser />,
       },
       {
-        path: '/register',
-        element: <Register />,
+        path: '/admin/addUser',
+        element: <AddSystemUser />,
       },
       {
-        path: '/add-company',
-        element: <AddCompany />,
-      },
-      {
-        path: '/add-user-profile',
-        element: <AddUserProfile />,
-      },
-      {
-        path: '/verify',
-        element: <Verify />,
+        path: '/admin/editUser',
+        element: <EditUser />,
       },
     ],
+  },
+  {
+    path: '/login',
+    element: <Login />,
+  },
+  {
+    path: '/register',
+    element: <Register />,
+  },
+  {
+    path: '/verify',
+    element: <Verify />,
+  },
+  {
+    path: '/add-company',
+    element: <AddCompany />,
+  },
+  {
+    path: '/add-user-profile',
+    element: <AddUserProfile />,
   },
 ]);

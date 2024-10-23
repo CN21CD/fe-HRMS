@@ -130,7 +130,7 @@ const Login = () => {
               htmlType='submit'
               className='my-6 w-[160px] h-[60px]'
             >
-              <p className='text-white text-xl font-medium'>Đăng nhập</p>
+              <span className='text-xl font-medium'>Đăng nhập</span>
             </Button>
           </form>
 

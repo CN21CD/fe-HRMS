@@ -12,7 +12,7 @@ const Register = () => {
   const [confirmPass, setConfirmPass] = useState<string>('');
   const nav = useNavigate();
 
-  const navToUserProfile = (e: React.FormEvent) => {
+  const navToCompany = (e: React.FormEvent) => {
     e.preventDefault();
     if (confirmPass != password) {
       toast.error('Lỗi, mật khẩu không đúng');
@@ -31,7 +31,7 @@ const Register = () => {
     <div className='flex justify-center items-center  h-screen'>
       <div className='bg-white flex flex-row w-[900px] h-[620px] shadow-2xl rounded-xl overflow-hidden'>
         <div className='flex-1 p-9 text-[18px]'>
-          <form onSubmit={navToUserProfile}>
+          <form onSubmit={navToCompany}>
             <h2 className='text-[48px] font-medium text-primary-orange'>
               Đăng ký
             </h2>
@@ -69,7 +69,7 @@ const Register = () => {
               type='primary'
               className='w-[160px] h-[60px] my-6'
             >
-              <p className='text-white text-xl font-medium'>Tiếp tục</p>
+              <span className='text-xl font-medium'>Tiếp tục</span>
             </Button>
           </form>
 
